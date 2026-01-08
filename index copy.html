@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Война Миров</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Война Миров — оригинальный анимационный сериал.">
+  <style>
+    :root {
+      --c-bg: #000000;        /* фон страницы */
+      --c-bg-section: #050505;/* фон секций */
+      --c-red: #ff0000;       /* основной красный */
+      --c-yellow: #ffd000;    /* основной жёлтый */
+      --c-text-main: #ffffff; /* основной текст */
+      --c-text-muted: #bfbfbf;/* второстепенный текст */
+      --c-border: #303030;    /* рамки/разделители */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, var(--c-red) 0, var(--c-bg) 55%, #000 100%);
+      color: var(--c-text-main);
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--c-yellow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0, rgba(255, 208, 0, 0.35) 0, transparent 60%),
+        radial-gradient(circle at 90% 20%, rgba(255, 0, 0, 0.3) 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.9) 0, rgba(0, 0, 0, 1) 70%);
+      opacity: 0.9;
+      z-index: -1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .logo-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      filter: drop-shadow(0 0 24px #000000);
+    }
+
+    .tagline {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      background: rgba(255, 0, 0, 0.12);
+      border: 1px solid var(--c-red);
+      color: var(--c-yellow);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 4vw, 40px);
+      margin-bottom: 14px;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--c-text-muted);
+      max-width: 520px;
+      margin-bottom: 24px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: var(--c-text-muted);
+    }
+
+    .hero-meta span {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #050505;
+      border: 1px solid var(--c-border);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, color 0.12s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--c-red), var(--c-yellow));
+      color: #220000;
+      box-shadow: 0 0 18px rgba(255, 0, 0, 0.8);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 22px rgba(255, 0, 0, 1);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--c-text-main);
+      border: 1px solid var(--c-yellow);
+    }
+
+    .btn-ghost:hover {
+      background: #101010;
+      transform: translateY(-1px);
+    }
+
+    main {
+      background: radial-gradient(circle at top, var(--c-red) 0, var(--c-bg) 55%);
+      border-top: 1px solid var(--c-border);
+    }
+
+    section {
+      padding: 56px 16px;
+    }
+
+    section:nth-of-type(odd) {
+      background: linear-gradient(to bottom, var(--c-bg-section), var(--c-bg));
+    }
+
+    section:nth-of-type(even) {
+      background: linear-gradient(to bottom, var(--c-bg), #000000);
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    .section-lead {
+      color: var(--c-text-muted);
+      margin-bottom: 20px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      font-size: 13px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #101010;
+      border: 1px solid var(--c-yellow);
+      color: var(--c-text-muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 28px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(255, 0, 0, 0.15), #050505);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      border: 1px solid var(--c-border);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .muted {
+      color: var(--c-text-muted);
+    }
+
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    .char-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .char-role {
+      font-size: 13px;
+      color: var(--c-yellow);
+      margin-bottom: 6px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--c-text-muted);
+    }
+
+    .meta-col strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--c-yellow);
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 30px 22px 26px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top, rgba(255, 208, 0, 0.2), #050505);
+      border: 1px solid var(--c-yellow);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9);
+    }
+
+    .cta-box p {
+      margin: 10px 0 20px;
+      color: var(--c-text-muted);
+    }
+
+    footer {
+      padding: 20px 16px 32px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--c-text-muted);
+      background: #000000;
+      border-top: 1px solid var(--c-border);
+    }
+
+    @media (max-width: 800px) {
+      header { padding-top: 28px; }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        text-align: center;
+      }
+      .hero-sub, .hero-meta { margin-left: auto; margin-right: auto; }
+      .btn-row { justify-content: center; }
+      .two-col { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container hero-grid">
+    <div class="logo-wrap">
+      <img src="https://i.ibb.co/BHJ9BPNf/logo2.png" alt="Логотип сериала">
+    </div>
+    <div>
+      <span class="tagline">оригинальный анимационный сериал</span>
+      <h1>Война Миров - вечное противостояние</h1>
+      <p class="hero-sub">
+        Это мультсериал о вечном противостоянии людей и богов, в котором раскрывается, на что способны существа ради достижения своих целей. В пилотной серии зрителя ждёт история начала предательства Аредата и погружение в иллюзорный мир лабораторий.
+      </p>
+      <div class="btn-row">
+        <form action="about:blank">
+            <button class="btn btn-primary" type="submit">Смотреть сториборд</button>
+        </form>
+        <form action="https://t.me/Guest6767">
+            <button class="btn btn-ghost" type="submit">Сотрудничать с нами</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="about">
+    <div class="section-inner">
+      <h2>О проекте</h2>
+      <p class="section-lead">
+Это захватывающий авторский 2D мультсериал, погружающий зрителя в мир напряжённого противостояния.
+      </p>
+      <div class="two-col">
+        <div class="card">
+          <h3>Идея</h3>
+          <p class="muted">
+Проект задуман как многослойная сага, исследующая разнообразные человеческие судьбы. Главные герои движимы разными мотивами: одни стремятся свергнуть существующую власть, считая её несправедливой; другие жаждут мести за прошлые обиды; третьи же пытаются овладеть чужими душами ради собственной выгоды. Эта глубокая палитра эмоций и целей позволяет зрителю проникнуться каждой историей, увидеть сложность выбора и последствия поступков персонажей.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Тон и атмосфера</h3>
+          <p class="muted">
+            Мрачные особняки, неоновые порталы и адская бюрократия встречаются с чёрным юмором,
+            семейной драмой и зрелищными магическими столкновениями.
+          </p>
+        </div>
+      </div>
+      <div class="pill-list">
+        <span class="pill">чёрный юмор</span>
+        <span class="pill">ангелы и наследие</span>
+        <span class="pill">неполная мозговая комплектация создателей</span>
+        <span class="pill">мир за гранью</span>
+        <span class="pill">месть</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="world">
+    <div class="section-inner">
+      <h2>Локации пилота Войны Миров</h2>
+      <p class="section-lead">
+        Над городами людей незримо работает адская инфраструктура: кланы демонов, контракты и древние печати,
+        которые больше не подчиняются старым правилам.
+      </p>
+      <div class="two-col">
+        <div class="card">
+          <h3>Мир созидания</h3>
+          <p class="muted">
+            Это мир, где разворачиваются события, связанные с Аредатом и Алестраизой. Здесь простираются огромные светящиеся леса, над которыми плывут пушистые облака, скрывающие за собой сверкающие золотые райские врата.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Вселенная сериала</h3>
+          <p class="muted">
+В пустоте Вселенной находятся четыре великих Вёрса, каждый из которых вмещает бесконечное количество миров. Некоторые из этих миров спрятаны от наших глаз, оставаясь непроницаемыми и загадочными. Другие же известны нам благодаря знаниям, легендам и прозрениям мудрецов древности. Например, широко известный Мир Созидания, где будут главные события 1 сезона.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="characters">
+    <div class="section-inner">
+      <h2>Главные персонажи пилота Войны Миров</h2>
+      <p class="section-lead">
+        Каждый герой сильно связан с сюжетом 1 сезона
+      </p>
+      <div class="characters-grid">
+        <div class="card">
+          <div class="char-name">Изгой</div>
+          <div class="char-role">Сильный магический мечник</div>
+          <p class="muted">
+            Саркастичный и упрямый, он не хотел власти и демонов, но слишком поздно отказался.
+            Теперь любое его слово превращается в юридически обязывающий адский приказ.
+          </p>
+        </div>
+        <div class="card">
+          <div class="char-name">Аредат</div>
+          <div class="char-role">Великий инквизитор-предатель</div>
+          <p class="muted">
+            Вежливый и смертельно опасный демон, связанный клятвой служить наследникам.
+            Любит контракты с мелким шрифтом и помнит все грехи семьи за последние столетия.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section id="characters">
+    <div class="section-inner">
+      <h2>Сюжет пилотного эпизода</h2>
+      <p class="section-lead">
+        Здесь вы можете прочитать полный сценарий пилотной серии Войны Миров
+      </p>
+      <div class="characters-grid">
+        <form action="https://docs.google.com/document/d/1UebqsAj0Qe3CJXMx-WEL76VLPO7xCbHa/edit?usp=sharing&ouid=112688737786275157501&rtpof=true&sd=true">
+          <button class="btn btn-primary" type="submit">Читать сценарий</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="cta">
+    <div class="section-inner">
+      <div class="cta-box">
+        <h2>Присоединяйся к нам</h2>
+        <p>
+          Подпишись, чтобы первым видеть арты, наброски серий и закрытые материалы производства.
+        </p>
+        <div class="btn-row" style="justify-content:center;">
+          <form action="https://t.me/Guest6767">
+            <button class="btn btn-primary" type="submit">Сотрудничество</button>
+          </form>
+          <form action="https://t.me/HerobroLife">
+            <button class="btn btn-ghost" type="submit">Присоединиться к сообществу</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+
+</body>
+</html>
